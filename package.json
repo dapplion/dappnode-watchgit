@@ -1,0 +1,28 @@
+{
+  "name": "dappnode-watchgit",
+  "version": "1.0.0",
+  "description": "Watches a git repository of a DNP and builds it again when it detects changes",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dapplion/dappnode-watchgit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dapplion/dappnode-watchgit/issues"
+  },
+  "homepage": "https://github.com/dapplion/dappnode-watchgit#readme",
+  "dependencies": {
+    "request": "^2.88.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
