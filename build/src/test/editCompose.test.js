@@ -1,9 +1,9 @@
-const expect = require('chai').expect
-const fs = require('fs')
-const shell = require('../utils/shell')
-const editCompose = require('../utils/editCompose')
+const expect = require('chai').expect;
+const fs = require('fs');
+const shell = require('../utils/shell');
+const editCompose = require('../utils/editCompose');
 
-const testFolder = './test-files'
+const testFolder = './test-files';
 
 const buildCompose = `version: '3.4'
 networks:
@@ -34,7 +34,7 @@ services:
         dns: 172.33.1.2
         networks:
             network:
-                ipv4_address: 172.33.1.4`
+                ipv4_address: 172.33.1.4`;
 
 const targetCompose = `version: '3.4'
 networks:
@@ -64,25 +64,25 @@ services:
         dns: 172.33.1.2
         networks:
             network:
-                ipv4_address: 172.33.1.4`
+                ipv4_address: 172.33.1.4`;
 
 describe('Util: editCompose', () => {
-    const dcFrom = `${testFolder}/dc-from.yml`
-    const dcTo = `${testFolder}/dc-to.yml`
-    before(async () => {
-        await shell(`rm -rf ${testFolder}`)
-        await shell(`mkdir -p ${testFolder}`)
-        fs.writeFileSync(dcFrom, buildCompose)
-        fs.writeFileSync(dcTo, targetCompose)
-    })
-    
-    it('Should move the image to the new compose', () => {
-        editCompose.moveImage(dcFrom, dcTo)
-        const image = editCompose.getImage(dcTo)
-        expect(image).to.equal('vpn.dnp.dappnode.eth:0.1.21')
-    })
+  const dcFrom = `${testFolder}/dc-from.yml`;
+  const dcTo = `${testFolder}/dc-to.yml`;
+  before(async () => {
+    await shell(`rm -rf ${testFolder}`);
+    await shell(`mkdir -p ${testFolder}`);
+    fs.writeFileSync(dcFrom, buildCompose);
+    fs.writeFileSync(dcTo, targetCompose);
+  });
 
-    after(async () => {
-        await shell(`rm -rf ${testFolder}`)
-    })
-})
+  it('Should move the image to the new compose', () => {
+    editCompose.moveImage(dcFrom, dcTo);
+    const image = editCompose.getImage(dcTo);
+    expect(image).to.equal('vpn.dnp.dappnode.eth:0.1.21');
+  });
+
+  after(async () => {
+    await shell(`rm -rf ${testFolder}`);
+  });
+});

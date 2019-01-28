@@ -4,7 +4,8 @@
   "description": "Watches a git repository of a DNP and builds it again when it detects changes",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "start": "node index"
   },
   "repository": {
     "type": "git",
@@ -18,11 +19,15 @@
   },
   "homepage": "https://github.com/dapplion/dappnode-watchgit#readme",
   "dependencies": {
+    "deepmerge": "^3.1.0",
+    "execa": "^1.0.0",
     "request": "^2.88.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^5.12.1",
+    "eslint-config-google": "^0.11.0",
     "mocha": "^5.2.0"
   }
 }
