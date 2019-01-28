@@ -31,8 +31,8 @@ async function updateRepo({user, repo, branch, sha, destPath}) {
     await shell(`git clone ${repoUrl} --branch ${branch} ${repoDir}`);
   }
 
-  const buildCompose = `${repoDir}/docker-compose*.yml`;
-  let targetCompose = `/usr/src/dappnode/DNCORE/docker-compose-${repo}.yml`;
+  const buildCompose = `${repoDir}/docker-compose.yml`;
+  let targetCompose = `${destPath}/docker-compose-${repo}.yml`;
   log(`Building at ${buildCompose}...`);
   await shell(`docker-compose -f ${buildCompose} build`, {timeout: 60*60*1000});
   // Move the build image tag to the compose used to up the DNP
@@ -41,7 +41,12 @@ async function updateRepo({user, repo, branch, sha, destPath}) {
     log(`Target compose ${targetCompose} does not exist. Using the build compose to up the DNP`);
     targetCompose = buildCompose;
   } else {
-    editCompose.moveImage(buildCompose, targetCompose);
+    try {
+      editCompose.moveImage(buildCompose, targetCompose);
+    } catch (e) {
+      log(`Error editing compose: ${e.stack}`);
+      targetCompose = buildCompose;
+    }
   }
   // Up
   log(`Up-ing ${targetCompose}...`);
