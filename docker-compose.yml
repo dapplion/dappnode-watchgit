@@ -2,6 +2,7 @@ version: "3.4"
 
 services:
   dappnode-watchgit.eth:
+    container_name: Watchgit
     build: ./build
     image: "dappnode-watchgit:0.1.0"
     restart: always
