@@ -10,6 +10,10 @@ services:
       - "/usr/src/dappnode/DNCORE/:/usr/src/app/DNCORE/"
       - "/var/run/docker.sock:/var/run/docker.sock"
     privileged: true
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
     environment:
       CONFIG_PATH: "/usr/src/app/DNCORE/watchgit.config"
       GITHUB_TOKEN: ""
